@@ -7,198 +7,129 @@ Most existing AI copywriting tools generate generic content without understandin
 There is a clear gap between marketing analytics and actionable content generation.
 
  PROPOSED SOLUTION:
+We built a Data-Aware Marketing Content Generator that:
 
-We propose a Data-Aware Marketing Content Generator that analyzes historical marketing campaign performance data and uses Generative AI to:
+Analyzes historical marketing campaign performance data.
 
-Generate 3 personalized marketing copy variants
+Generates 3 personalized marketing copy variants per customer segment.
 
-Provide a clear A/B testing hypothesis
+Provides a clear A/B testing hypothesis based on data.
 
-Explain why a particular copy strategy is recommended
+Outputs results in a structured JSON format for easy experimentation.
 
-Output results in a structured JSON format for easy experimentation
+Instead of generating copy blindly, our system conditions the content generation on campaign KPIs, audience segments, channels, and performance trends.
 
-Instead of generating copy blindly, our system conditions the LLM on campaign KPIs, audience segments, channels, and performance trends.
+⚠️ Note: In this hackathon MVP, we used rule-based, deterministic logic for insights. LLM integration is designed to be plug-and-play but was not executed live due to API constraints.
+
 
  DATASET USED:
 
-Dataset Used
-Marketing Campaign Performance Dataset
+ Marketing Campaign Performance Dataset from Kaggle
+🔗 Dataset Link
 
-This project uses the Marketing Campaign Performance Dataset sourced from Kaggle, which provides detailed insights into the effectiveness of various marketing campaigns.
+200,000 campaign records spanning two years.
 
-The dataset contains 200,000 unique campaign records collected over a two-year period, offering a comprehensive view of campaign performance across diverse companies, audience segments, channels, and timeframes.
+Covers diverse companies, audience segments, channels, and timeframes.
 
-It captures both performance metrics and contextual campaign attributes, enabling data-driven analysis of marketing effectiveness and making it well-suited for building a data-aware Generative AI system.
+Key attributes used in MVP:
 
-🔗 Dataset Link:
-https://www.kaggle.com/datasets/manishabhatt22/marketing-campaign-performance-dataset
+Campaign_Type, Customer_Segment, Target_Audience
 
+Channels_Used, Conversion_Rate, ROI, Engagement_Score
 
-For the hackathon MVP, the system selectively uses attributes that directly influence marketing copy personalization and strategy reasoning, including:
+Clicks & Impressions, Duration, Language
 
-Campaign_Type
-
-Target_Audience
-
-Customer_Segment
-
-Channels_Used
-
-Conversion_Rate
-
-ROI
-
-Engagement_Score
-
-Clicks & Impressions
-
-Duration
-
-Language
-
-These features are used to condition the LLM on campaign performance trends, audience context, and channel behavior, enabling more relevant and explainable content generation.
-
-Dataset Scope & Relevance:
-
-By leveraging this dataset, the system can:
-
-Analyze campaign effectiveness across channels and segments
-
-Identify high- and low-performing campaign patterns
-
-Translate KPI insights into actionable marketing copy
-
-Support data-driven A/B testing hypotheses
-
-This dataset provides a strong foundation for bridging marketing analytics with Generative AI-powered content creation.
-
- Future Extensions:
-
-Attributes such as Company, Location, and Date are not directly used in the MVP but enable future enhancements such as:
-
-Brand-specific tone adaptation
-
-Geo-localized campaign messaging
-
-Time-series and seasonal performance analysis
-
-Key Design Principles
-
-Explainability over black-box generation
-
-Segment-level personalization
-
-Reproducibility and simplicity for hackathon scope
+The system analyzes KPIs per segment to produce actionable marketing copy and a simple A/B hypothesis.
 
 
-SYSTEM ARCHITECTURE & DESGIN
+SYSTEM ARCHITECTURE & DESGIN:
 
 
-![WhatsApp Image 2026-01-03 at 2 27 48 PM](https://github.com/user-attachments/assets/231e2bd5-850b-41c5-8064-93a1eeae1a16)
+![WhatsApp Image 2026-01-04 at 12 25 49 AM](https://github.com/user-attachments/assets/c03bf314-9a2b-4111-a8cc-75df40b68d5f)
 
+TECHNIQUES USED:
 
+Rule-based KPI analysis
 
+Feature computation: conversion rate, ROI, engagement score
 
+Copy generation logic based on segment-level insights
 
+Structured JSON output for consistency
 
- AI & ML TECHNIQUES USED:
- 
-1)Generative AI
-
-2)Large Language Models (LLMs)
-
-3)Prompt Engineering
-
-4)Context Engineering
-
-5)Structured JSON output control
-
-Machine Learning Concepts
-
-Feature engineering (CTR, ROI, engagement buckets)
-
-Performance trend interpretation
-
-Rule-based reasoning over KPIs
-
-Agentic Pattern (Conceptual)
-
-KPI Analyzer Agent
-
-Copy Generation Agent
+⚠️ Note: LLM integration is optional/future — currently, content is generated using rule-based logic.
 
 GUARDRAILS & EVALUATION:
-Guardrails Implemented
 
-Enforced JSON schema output
+Enforced JSON schema for output.
 
-KPI value validation
+KPIs validated against historical segment data.
 
-Copy length constraints
+Copy strategies aligned with computed insights.
 
-Non-offensive language filtering
+Output is reproducible and deterministic.
 
-Evaluation Strategy
-
-Since this is a generative task, evaluation is qualitative and rule-based:
+Evaluation is qualitative, focusing on:
 
 Copy diversity across variants
 
-Alignment between KPI condition and copy strategy
+Alignment between KPIs and strategy
 
-Clarity and relevance of A/B hypothesis
+Clarity of A/B hypothesis
 
-Human readability and tone appropriateness
+Professional tone
 
 TECH STACK:
 
-Language: Python
+Python
 
-Libraries: Pandas, LangChain
+Pandas
 
-LLM: OpenAI / Gemini / Local LLM (user-provided key)
+JSON
 
-Optional: FastAPI for API-based execution
-
-Environment: Jupyter Notebook / Python script
+(Optional for future) LLMs: Gemini / Gemma / Local LLM
 
 HOW TO RUN:
+
+Upload the Kaggle dataset (archive.zip) and extract CSV.
+
+Select a customer segment.
+
+Run the script to generate JSON output:
 
 python app.py
 
 
-ASSUMPTIONS & LIMTATIONS:
+ASSUMPTIONS & LIMITATIONS:
 
-Segment-level personalization (not individual users)
+Segment-level personalization only (not individual users).
 
-Static historical dataset
+Static historical dataset — no live campaign feedback.
 
-No live campaign feedback loop
+A/B testing hypothesis is heuristic, not statistically validated.
 
-Hypotheses are heuristic, not statistically validated
+LLM integration is not live in MVP.
 
-IMPACT & EXPANDABILITY:
-Immediate Impact
+IMMEDIATE IMPACT:
 
-Helps marketers convert KPIs into actionable copy
+Helps marketers translate KPIs into actionable marketing copy.
 
-Reduces guesswork in A/B testing
+Reduces guesswork in A/B testing.
 
-Suitable for startups and SMBs
+Applicable for startups and SMBs.
 
 FUTURE SCOPE:
 
-Real-time campaign feedback learning
+Integrate live campaign feedback for automated learning.
 
-Multi-language generation
+LLM integration for richer, more creative copy generation.
 
-Channel-specific optimization
+Multi-language copy support.
 
-Integration with ad platforms
+Integration with marketing automation platforms.
 
-Vector similarity search using embeddings (RAG)
+Channel-specific optimization using historical trends.
 
- Conclusion:
+CONCLUSION
 
-This project demonstrates how Generative AI can bridge the gap between analytics and action. By making LLMs aware of campaign performance data, we move from generic content generation to explainable, data-driven marketing decisions.
+This project demonstrates how data-aware logic can bridge marketing analytics and action. By making content generation conditioned on KPIs and audience segments, we ensure outputs are actionable, explainable, and immediately useful — even without live LLM calls.
