@@ -91,16 +91,28 @@ Segment-level personalization
 
 Reproducibility and simplicity for hackathon scope
 
+
+SYSTEM ARCHITECTURE & DESGIN
+
+
+![WhatsApp Image 2026-01-03 at 2 27 48 PM](https://github.com/user-attachments/assets/231e2bd5-850b-41c5-8064-93a1eeae1a16)
+
+
+
+
+
+
  AI & ML TECHNIQUES USED:
-Generative AI
+ 
+1)Generative AI
 
-Large Language Models (LLMs)
+2)Large Language Models (LLMs)
 
-Prompt Engineering
+3)Prompt Engineering
 
-Context Engineering
+4)Context Engineering
 
-Structured JSON output control
+5)Structured JSON output control
 
 Machine Learning Concepts
 
